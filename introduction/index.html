@@ -762,10 +762,8 @@ solveRPN exp <span class="Statement">=</span> head (foldl foldingFunction [] (wo
 </section>
 
 <!-- deck.navigation snippet -->
-<!--
 <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
 <a href="#" class="deck-next-link" title="Next">&#8594;</a>
--->
 
 <!-- deck.status snippet -->
 <p class="deck-status">
@@ -800,11 +798,6 @@ solveRPN exp <span class="Statement">=</span> head (foldl foldingFunction [] (wo
 <script>
 $(function() {
 	$.deck('.slide');
-    $.deck('getContainer').bind('contextmenu', function(e) {
-        e.preventDefault();
-        $.deck('next');
-        return false;
-    });
 });
 </script>
 
