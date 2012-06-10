@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>Haskell</title>
+	
+	<meta name="description" content="Haskell">
+	<meta name="author" content="Miran Lipovaca">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Core and extension CSS files -->
+	<link rel="stylesheet" href="/core/deck.core.css">
+	<link rel="stylesheet" href="/extensions/goto/deck.goto.css">
+	<link rel="stylesheet" href="/extensions/menu/deck.menu.css">
+	<link rel="stylesheet" href="/extensions/navigation/deck.navigation.css">
+	<link rel="stylesheet" href="/extensions/status/deck.status.css">
+	<link rel="stylesheet" href="/extensions/hash/deck.hash.css">
+	<link rel="stylesheet" href="/extensions/scale/deck.scale.css">
+	
+	<!-- Style theme. More available in /themes/style/ or create your own. -->
+	<link rel="stylesheet" href="/themes/style/swiss.css">
+	
+	<!-- Transition theme. More available in /themes/transition/ or create your own. -->
+	<link rel="stylesheet" href="/themes/transition/horizontal-slide.css">
+	
+	<script src="/modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+<!-- Begin slides -->
+<section class="slide" id="title-slide">
+	<h1>Haskell</h1>
+</section>
+<section class="slide" id="purely-functional">
+    <h2>Purely functional</h2>
+    <ul>
+        <li>Functions only take arguments and return values</li>
+        <li>Data is immutable</li>
+        <li>Functions are first-class citizens</li>
+    </ul>
+    <h3>Advantages</h3>
+    <ul>
+        <li>Modularity</li>
+        <li>Abstraction</li>
+        <li>Testing is a breeze</li>
+        <li>Good for concurrency</li>
+        <li>Allows better optimization by compiler</li>
+    </ul>
+</section>
+<section class="slide" id="lazy">
+    <h2>Lazy</h2>
+    <ul>
+        <li>Computations deferred until their result is actually needed</li>
+        <li>Allows for infinite data structures</li>
+        <li>Better separation of concerns</li>
+    </ul>
+</section>
+<section class="slide" id="statically-typed">
+    <h2>Statically typed</h2>
+    <ul>
+        <li>Strong type system</li>
+        <li>Everything is a value, every value has a type</li>
+        <li>Catches a lot of errors</li>
+        <li>Types are automatically inferred</li>
+        <li>Serves as documentation</li>
+    </ul>
+</section>
+<section class="slide" id="batteries-included">
+    <h2>Batteries included</h2>
+    <ul>
+        <li>Haskell Platform</li>
+        <li>Easy to install and get started</li>
+    </ul>
+</section>
+<section class="slide" id="cabal-and-hackage">
+    <h2>Libraries</h2>
+    <ul>
+        <li>No shortage of high quality libraries</li>
+        <li>Hackage is the repository for Haskell packages</li>
+        <li>Packages are easy to install</li>
+        <li>There's a package for just about anything</li>
+    </ul>
+</section>
+<section class="slide" id="fun">
+    <h2>Haskell is fun</h2>
+    <ul>
+        <li>Possibly more than rollercoasters</li>
+        <li>Think differently about problems</li>
+        <li>Play around in the interactive mode</li>
+    </ul>
+    <h2>Super nice community</h2>
+    <ul>
+        <li>Friendly to newbies</li>
+        <li>Great representation on Stack Overflow</li>
+        <li>Come hang out in <code>#haskell</code></li>
+    </ul>
+</section>
+<section class="slide" id="lets-get-busy">
+    <h1>Let's get busy</h1>
+</section>
+<section class="slide" id="the-interactive-mode">
+    <h2>The interactive mode</h2>
+    <ul>
+        <li>Evaluate Haskell expressions on the fly</li>
+        <li>Similar to the interactive mode of Python, Ruby et al.</li>
+    </ul>
+<pre>
+$ ghci
+GHCi, version 7.0.4: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+Loading package ffi-1.0 ... linking ... done.
+Prelude &gt; 
+</pre>
+</section>
+<section class="slide" id="the-baby-stuff">
+<h2>Starting out</h2>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Constant">4</span> <span class="Statement">+</span> <span class="Constant">6</span>
+<span class="Constant">10</span>
+
+λ<span class="Statement">&gt;</span> (<span class="Constant">11</span> <span class="Statement">+</span> <span class="Constant">3.0</span>) <span class="Statement">*</span> <span class="Constant">10</span>
+<span class="Constant">140.0</span>
+
+λ<span class="Statement">&gt;</span> True <span class="Statement">&amp;&amp;</span> False
+False
+
+λ<span class="Statement">&gt;</span> <span class="Constant">&quot;hello&quot;</span> <span class="Statement">==</span> <span class="Constant">&quot;hello&quot;</span>
+True
+</pre>
+<p>Note: we changed the prompt from <code>Prelude&gt;</code> to <code>λ&gt;</code> because that's way cooler.</p>
+</section>
+<section class="slide" id="say-it-aint-so">
+<h2>Say it ain't so!</h2>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Constant">&quot;hello&quot;</span> <span class="Statement">==</span> True
+
+<span class="Statement">&lt;</span>interactive<span class="Statement">&gt;:</span><span class="Constant">1</span><span class="Statement">:</span><span class="Constant">12</span><span class="Statement">:</span>
+    Couldn't match expected <span class="Type">type</span> `[Char]' with actual <span class="Type">type</span> `Bool'
+    In the second argument <span class="Statement">of</span> `(<span class="Statement">==</span>)', namely `True'
+    In the expression<span class="Statement">:</span> <span class="Constant">&quot;hello&quot;</span> <span class="Statement">==</span> True
+    In an equation for `it'<span class="Statement">:</span> it <span class="Statement">=</span> <span class="Constant">&quot;hello&quot;</span> <span class="Statement">==</span> True
+</pre>
+</section>
+
+<section class="slide" id="applying-functions">
+<h2>Applying functions</h2>
+<pre>
+λ<span class="Statement">&gt;</span> succ <span class="Constant">1</span>
+<span class="Constant">2</span>
+
+λ<span class="Statement">&gt;</span> min <span class="Constant">9</span> <span class="Constant">10</span>
+<span class="Constant">9</span>
+
+λ<span class="Statement">&gt;</span> succ <span class="Constant">3</span> <span class="Statement">*</span> <span class="Constant">10</span>
+<span class="Constant">40</span>
+
+λ<span class="Statement">&gt;</span> succ (<span class="Constant">3</span> <span class="Statement">*</span> <span class="Constant">10</span>)
+<span class="Constant">31</span>
+
+λ<span class="Statement">&gt;</span> div <span class="Constant">30</span> <span class="Constant">5</span>
+<span class="Constant">6</span>
+
+λ<span class="Statement">&gt;</span> <span class="Constant">30</span> <span class="Statement">`div`</span> <span class="Constant">5</span>
+<span class="Constant">6</span>
+</pre>
+</section>
+<section class="slide" id="defining-functions">
+<h2>Defining functions</h2>
+<p>A function that calculates a ray's angle of refraction</p>
+<h3>myfuns.hs</h3>
+<pre>
+refraction θ n1 n2 <span class="Statement">=</span> asin (sin θ <span class="Statement">*</span> n2 <span class="Statement">/</span> n1)
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>l myfuns
+[<span class="Constant">1</span> <span class="Statement">of</span> <span class="Constant">1</span>] Compiling Main ( myfuns<span class="Statement">.</span>hs, interpreted )
+Ok, modules loaded<span class="Statement">:</span> Main<span class="Statement">.</span>
+
+λ<span class="Statement">&gt;</span> refraction <span class="Constant">0.1</span> <span class="Constant">9</span> <span class="Constant">10</span>
+<span class="Constant">0.11115477042813192</span>
+</pre>
+</section>
+<section class="slide" id="type-annotations">
+<h2>What about the types?</h2>
+<pre>
+refraction <span class="Statement">::</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double
+refraction θ n1 n2 <span class="Statement">=</span> asin (sin θ <span class="Statement">*</span> n2 <span class="Statement">/</span> n1)
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>t refraction
+refraction <span class="Statement">::</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double
+
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>t <span class="Constant">'a'</span>
+<span class="Constant">'a'</span> <span class="Statement">::</span> Char
+
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>t <span class="Constant">&quot;whatup&quot;</span>
+<span class="Constant">&quot;whatup&quot;</span> <span class="Statement">::</span> [Char]
+
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>t 7 <span class="Statement">==</span> 9
+7 <span class="Statement">==</span> 9 <span class="Statement">::</span> Bool
+
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>t (True, <span class="Constant">'f'</span>)
+(True, <span class="Constant">'f'</span>) <span class="Statement">::</span> (Bool, Char)
+</pre>
+</section>
+<section class="slide" id="tuples">
+<h2>Tuples</h2>
+<pre>
+λ<span class="Statement">&gt;</span> (<span class="Constant">1</span>, <span class="Constant">2</span>)
+(<span class="Constant">1</span>,<span class="Constant">2</span>)
+
+λ<span class="Statement">&gt;</span> (<span class="Constant">3</span>, True, <span class="Constant">&quot;hello&quot;</span>)
+(<span class="Constant">3</span>,True,<span class="Constant">&quot;hello&quot;</span>)
+
+λ<span class="Statement">&gt;</span> fst (<span class="Constant">3</span>,<span class="Constant">4</span>)
+<span class="Constant">3</span>
+
+λ<span class="Statement">&gt;</span> snd (<span class="Constant">9</span>,<span class="Constant">3</span>)
+<span class="Constant">3</span>
+</pre>
+</section>
+
+<section class="slide" id="lists">
+<h2>Lists</h2>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">let</span> lottery <span class="Statement">=</span> [<span class="Constant">1</span>,<span class="Constant">5</span>,<span class="Constant">8</span>,<span class="Constant">11</span>,<span class="Constant">44</span>,<span class="Constant">87</span>]
+
+λ<span class="Statement">&gt;</span> lottery
+[<span class="Constant">1</span>,<span class="Constant">5</span>,<span class="Constant">8</span>,<span class="Constant">11</span>,<span class="Constant">44</span>,<span class="Constant">87</span>]
+</pre>
+<img src="img/listmonster.png">
+</section>
+<section class="slide" id="lists-2">
+<h2>Lists</h2>
+<pre>
+λ<span class="Statement">&gt;</span> lottery <span class="Statement">++</span> [<span class="Constant">1000</span>,<span class="Constant">3000</span>]
+[<span class="Constant">1</span>,<span class="Constant">5</span>,<span class="Constant">8</span>,<span class="Constant">11</span>,<span class="Constant">44</span>,<span class="Constant">87</span>,<span class="Constant">1000</span>,<span class="Constant">3000</span>]
+
+λ<span class="Statement">&gt;</span> reverse lottery
+[<span class="Constant">87</span>,<span class="Constant">44</span>,<span class="Constant">11</span>,<span class="Constant">8</span>,<span class="Constant">5</span>,<span class="Constant">1</span>]
+
+λ<span class="Statement">&gt;</span> head [<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">3</span>,<span class="Constant">4</span>]
+<span class="Constant">1</span>
+
+λ<span class="Statement">&gt;</span> tail [<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">3</span>,<span class="Constant">4</span>]
+[<span class="Constant">2</span>,<span class="Constant">3</span>,<span class="Constant">4</span>]
+
+λ<span class="Statement">&gt;</span> <span class="Constant">5000</span><span class="Statement">:</span>lottery
+[<span class="Constant">5000</span>,<span class="Constant">1</span>,<span class="Constant">5</span>,<span class="Constant">8</span>,<span class="Constant">11</span>,<span class="Constant">44</span>,<span class="Constant">87</span>]
+
+λ<span class="Statement">&gt;</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">4</span>]
+[<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">3</span>,<span class="Constant">4</span>]
+
+λ<span class="Statement">&gt;</span> [<span class="Constant">5</span>,<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">1</span>] <span class="Statement">!!</span> <span class="Constant">2</span>
+<span class="Constant">3</span>
+</pre>
+</section>
+<section class="slide" id="infinite-lists">
+<h2>Lists can be infinite</h2>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">:</span>t take
+take <span class="Statement">::</span> Int <span class="Statement">-&gt;</span> [a] <span class="Statement">-&gt;</span> [a]
+
+λ<span class="Statement">&gt;</span> take <span class="Constant">5</span> [<span class="Constant">1</span><span class="Statement">..</span>]
+[<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">3</span>,<span class="Constant">4</span>,<span class="Constant">5</span>]
+
+λ<span class="Statement">&gt;</span> take <span class="Constant">0</span> [<span class="Constant">1</span><span class="Statement">..</span>]
+[]
+
+λ<span class="Statement">&gt;</span> zip <span class="Constant">&quot;swag&quot;</span> [<span class="Constant">8</span>,<span class="Constant">7</span><span class="Statement">..</span>]
+[(<span class="Constant">'s'</span>,<span class="Constant">8</span>),(<span class="Constant">'w'</span>,<span class="Constant">7</span>),(<span class="Constant">'a'</span>,<span class="Constant">6</span>),(<span class="Constant">'g'</span>,<span class="Constant">5</span>)]
+
+λ<span class="Statement">&gt;</span> take <span class="Constant">5</span> (drop <span class="Constant">3</span> [<span class="Constant">1</span><span class="Statement">..</span>])
+[<span class="Constant">4</span>,<span class="Constant">5</span>,<span class="Constant">6</span>,<span class="Constant">7</span>,<span class="Constant">8</span>]
+
+λ<span class="Statement">&gt;</span> <span class="Constant">7</span> <span class="Statement">`elem`</span> [<span class="Constant">1</span><span class="Statement">..</span>]
+True
+</pre>
+</pre>
+</section>
+<section class="slide" id="list-comprehensions">
+<h2>List comprehensions</h2>
+<p>Draw elements from existing lists to generate new lists</p>
+<pre>
+λ<span class="Statement">&gt;</span> [x<span class="Statement">*</span><span class="Constant">3</span> <span class="Statement">|</span> x <span class="Statement">&lt;-</span> [<span class="Constant">4</span><span class="Statement">..</span><span class="Constant">8</span>]]
+[<span class="Constant">12</span>,<span class="Constant">15</span>,<span class="Constant">18</span>,<span class="Constant">21</span>,<span class="Constant">24</span>]
+
+λ<span class="Statement">&gt;</span> [x<span class="Statement">*</span><span class="Constant">3</span> <span class="Statement">|</span> x <span class="Statement">&lt;-</span> [<span class="Constant">4</span><span class="Statement">..</span><span class="Constant">8</span>], odd x]
+[<span class="Constant">15</span>,<span class="Constant">21</span>]
+
+λ<span class="Statement">&gt;</span> [(a,b) <span class="Statement">|</span> a <span class="Statement">&lt;-</span> [<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">3</span>], b <span class="Statement">&lt;-</span> <span class="Constant">&quot;hey&quot;</span>]
+[(<span class="Constant">1</span>,<span class="Constant">'h'</span>),(<span class="Constant">1</span>,<span class="Constant">'e'</span>),(<span class="Constant">1</span>,<span class="Constant">'y'</span>),(<span class="Constant">2</span>,<span class="Constant">'h'</span>),(<span class="Constant">2</span>,<span class="Constant">'e'</span>),(<span class="Constant">2</span>,<span class="Constant">'y'</span>),(<span class="Constant">3</span>,<span class="Constant">'h'</span>),(<span class="Constant">3</span>,<span class="Constant">'e'</span>),(<span class="Constant">3</span>,<span class="Constant">'y'</span>)]
+
+λ<span class="Statement">&gt;</span> [(a,b) <span class="Statement">|</span> a <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">20</span>], b <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span>a], a<span class="Statement">*</span>b <span class="Statement">==</span> <span class="Constant">36</span>]
+[(<span class="Constant">6</span>,<span class="Constant">6</span>),(<span class="Constant">9</span>,<span class="Constant">4</span>),(<span class="Constant">12</span>,<span class="Constant">3</span>),(<span class="Constant">18</span>,<span class="Constant">2</span>)]
+</pre>
+</section>
+<!--
+<section class="slide">
+<h2>Finding right triangles</h2>
+<p>Let's find some right triangles whose perimeter is 24</p>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> [(a,b,c) <span class="Statement">|</span> a <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], b <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], c <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>]]
+[(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">1</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">2</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">3</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">4</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">5</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">6</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">7</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">8</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">9</span>),(<span class="Constant">1</span>,<span class="Constant">1</span>,<span class="Constant">10</span>),(<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">1</span>),(<span class="Constant">1</span>,<span class="Constant">2</span>,<span class="Constant">2</span>) ...
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> [(a,b,c) <span class="Statement">|</span> a <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], b <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], c <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], a<span class="Statement">^</span><span class="Constant">2</span> <span class="Statement">+</span> b<span class="Statement">^</span><span class="Constant">2</span> <span class="Statement">==</span> c<span class="Statement">^</span><span class="Constant">2</span>]
+[(<span class="Constant">3</span>,<span class="Constant">4</span>,<span class="Constant">5</span>),(<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">5</span>),(<span class="Constant">6</span>,<span class="Constant">8</span>,<span class="Constant">10</span>),(<span class="Constant">8</span>,<span class="Constant">6</span>,<span class="Constant">10</span>)]
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> [(a,b,c) <span class="Statement">|</span> c <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], b <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span>c], a <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span>b], a<span class="Statement">^</span><span class="Constant">2</span> <span class="Statement">+</span> b<span class="Statement">^</span><span class="Constant">2</span> <span class="Statement">==</span> c<span class="Statement">^</span><span class="Constant">2</span>]
+[(<span class="Constant">3</span>,<span class="Constant">4</span>,<span class="Constant">5</span>),(<span class="Constant">6</span>,<span class="Constant">8</span>,<span class="Constant">10</span>)]
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> [(a,b,c) <span class="Statement">|</span> c <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span><span class="Constant">10</span>], b <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span>c], a <span class="Statement">&lt;-</span> [<span class="Constant">1</span><span class="Statement">..</span>b], a<span class="Statement">^</span><span class="Constant">2</span> <span class="Statement">+</span> b<span class="Statement">^</span><span class="Constant">2</span> <span class="Statement">==</span> c<span class="Statement">^</span><span class="Constant">2</span>, a <span class="Statement">+</span> b <span class="Statement">+</span> c <span class="Statement">==</span> <span class="Constant">24</span>]
+[(<span class="Constant">6</span>,<span class="Constant">8</span>,<span class="Constant">10</span>)]
+</pre>
+</section>
+-->
+<section class="slide" id="character-frequncy">
+<h2>Analyzing character frequency</h2>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">let</span> sentence <span class="Statement">=</span> <span class="Constant">&quot;whoa there man&quot;</span>
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> <span class="Statement">let</span> letters <span class="Statement">=</span> [c <span class="Statement">|</span> c <span class="Statement">&lt;-</span> sentence, c <span class="Statement">/=</span> <span class="Constant">' '</span>]
+λ<span class="Statement">&gt;</span> letters
+<span class="Constant">&quot;whoathereman&quot;</span>
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> sort letters
+<span class="Constant">&quot;aaeehhmnortw&quot;</span>
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> group (sort letters)
+[<span class="Constant">&quot;aa&quot;</span>,<span class="Constant">&quot;ee&quot;</span>,<span class="Constant">&quot;hh&quot;</span>,<span class="Constant">&quot;m&quot;</span>,<span class="Constant">&quot;n&quot;</span>,<span class="Constant">&quot;o&quot;</span>,<span class="Constant">&quot;r&quot;</span>,<span class="Constant">&quot;t&quot;</span>,<span class="Constant">&quot;w&quot;</span>]
+</pre>
+<pre class="slide">
+λ<span class="Statement">&gt;</span> [(length xs, head xs) <span class="Statement">|</span> xs <span class="Statement">&lt;-</span> group (sort letters)]
+[(<span class="Constant">2</span>,<span class="Constant">'a'</span>),(<span class="Constant">2</span>,<span class="Constant">'e'</span>),(<span class="Constant">2</span>,<span class="Constant">'h'</span>),(<span class="Constant">1</span>,<span class="Constant">'m'</span>),(<span class="Constant">1</span>,<span class="Constant">'n'</span>),(<span class="Constant">1</span>,<span class="Constant">'o'</span>),(<span class="Constant">1</span>,<span class="Constant">'r'</span>),(<span class="Constant">1</span>,<span class="Constant">'t'</span>),(<span class="Constant">1</span>,<span class="Constant">'w'</span>)]
+</pre>
+</section>
+<section class="slide" id="making-this-into-a-function">
+<h2>Let's make a function out of this</h2>
+<pre>
+<span class="PreProc">import</span> Data.List
+
+frequency <span class="Statement">::</span> [Char] <span class="Statement">-&gt;</span> [(Int, Char)]
+frequency sentence <span class="Statement">=</span> [(length xs, head xs) <span class="Statement">|</span> xs <span class="Statement">&lt;-</span> groups]
+    <span class="Type">where</span> letters <span class="Statement">=</span> [c <span class="Statement">|</span> c <span class="Statement">&lt;-</span> sentence, c <span class="Statement">/=</span> <span class="Constant">' '</span>]
+          groups <span class="Statement">=</span> group (sort letters)
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> frequency <span class="Constant">&quot;asdksjdhfwasl&quot;</span>
+[(<span class="Constant">2</span>,<span class="Constant">'a'</span>),(<span class="Constant">2</span>,<span class="Constant">'d'</span>),(<span class="Constant">1</span>,<span class="Constant">'f'</span>),(<span class="Constant">1</span>,<span class="Constant">'h'</span>),(<span class="Constant">1</span>,<span class="Constant">'j'</span>),(<span class="Constant">1</span>,<span class="Constant">'k'</span>),(<span class="Constant">1</span>,<span class="Constant">'l'</span>),(<span class="Constant">3</span>,<span class="Constant">'s'</span>),(<span class="Constant">1</span>,<span class="Constant">'w'</span>)]
+</pre>
+</section>
+<section class="slide" id="pattern-matching">
+<h2>Pattern matching</h2>
+<ul>
+    <li>Deconstruct data according to patterns</li>
+    <li>Separate function bodies for different patterns</li>
+</ul>
+<pre>
+safeDiv <span class="Statement">::</span> Int <span class="Statement">-&gt;</span> Int <span class="Statement">-&gt;</span> Maybe Int
+safeDiv _ <span class="Constant">0</span> <span class="Statement">=</span> Nothing
+safeDiv x y <span class="Statement">=</span> Just (x <span class="Statement">`div`</span> y)
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Constant">8</span> <span class="Statement">`safeDiv`</span> <span class="Constant">0</span>
+Nothing
+
+λ<span class="Statement">&gt;</span> <span class="Constant">9</span> <span class="Statement">`safeDiv`</span> <span class="Constant">3</span>
+Just <span class="Constant">3</span>
+</pre>
+</section>
+<section class="slide" id="pattern-matching-2">
+<h2>Pattern matching</h2>
+<pre>
+tellList <span class="Statement">::</span> Show a <span class="Statement">=&gt;</span> [a] <span class="Statement">-&gt;</span> String
+tellList [] <span class="Statement">=</span> <span class="Constant">&quot;This is an empty list&quot;</span>
+tellList (x<span class="Statement">:</span>xs) <span class="Statement">=</span> <span class="Constant">&quot;The head is &quot;</span> <span class="Statement">++</span> show x <span class="Statement">++</span>
+                  <span class="Constant">&quot;, the tail is &quot;</span> <span class="Statement">++</span> show xs
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> tellList []
+<span class="Constant">&quot;This is an empty list&quot;</span>
+
+λ<span class="Statement">&gt;</span> tellList [<span class="Constant">5</span>,<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">2</span>]
+<span class="Constant">&quot;The head is 5, the tail is [4,3,2]&quot;</span>
+
+λ<span class="Statement">&gt;</span> tellList <span class="Constant">&quot;bart&quot;</span>
+<span class="Constant">&quot;The head is 'b', the tail is </span><span class="Special">\&quot;</span><span class="Constant">art</span><span class="Special">\&quot;</span><span class="Constant">&quot;</span>
+
+λ<span class="Statement">&gt;</span> tellList [<span class="Constant">5</span>]
+<span class="Constant">&quot;The head is 5, the tail is []&quot;</span>
+</pre>
+</section>
+<section class="slide" id="pattern-matching-3">
+<h2>Pattern matching</h2>
+<pre>
+firstThree <span class="Statement">::</span> [a] <span class="Statement">-&gt;</span> Maybe (a,a,a)
+firstThree (x<span class="Statement">:</span>y<span class="Statement">:</span>z<span class="Statement">:</span>_) <span class="Statement">=</span> Just (x,y,z)
+firstThree xs <span class="Statement">=</span> Nothing
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> firstThree [<span class="Constant">5</span>,<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">2</span>,<span class="Constant">1</span>]
+Just (<span class="Constant">5</span>,<span class="Constant">4</span>,<span class="Constant">3</span>)
+
+λ<span class="Statement">&gt;</span> firstThree [True,False]
+Nothing
+</pre>
+</section>
+<section class="slide" id="recursion">
+<h2>Recursion</h2>
+<ul>
+    <li>No modifying of state</li>
+    <li>So no for loops</li>
+    <li>Use recursion to iterate</li>
+</ul>
+    <section class="slide">
+<pre>
+sum' <span class="Statement">::</span> [Int] <span class="Statement">-&gt;</span> Int
+sum' [] <span class="Statement">=</span> <span class="Constant">0</span>
+sum' (x<span class="Statement">:</span>xs) <span class="Statement">=</span> x <span class="Statement">+</span> sum' xs
+</pre>
+</section>
+<section class="slide">
+<pre>
+sum' [<span class="Constant">5</span>,<span class="Constant">4</span>,<span class="Constant">8</span>,<span class="Constant">1</span>]                <span class="Statement">=</span>
+<span class="Constant">5</span> <span class="Statement">+</span> sum' [<span class="Constant">4</span>,<span class="Constant">8</span>,<span class="Constant">1</span>]              <span class="Statement">=</span>
+<span class="Constant">5</span> <span class="Statement">+</span> (<span class="Constant">4</span> <span class="Statement">+</span> sum' [<span class="Constant">8</span>,<span class="Constant">1</span>])          <span class="Statement">=</span>
+<span class="Constant">5</span> <span class="Statement">+</span> (<span class="Constant">4</span> <span class="Statement">+</span> (<span class="Constant">8</span> <span class="Statement">+</span> sum' [<span class="Constant">1</span>]))      <span class="Statement">=</span>
+<span class="Constant">5</span> <span class="Statement">+</span> (<span class="Constant">4</span> <span class="Statement">+</span> (<span class="Constant">8</span> <span class="Statement">+</span> (<span class="Constant">1</span> <span class="Statement">+</span> sum' []))) <span class="Statement">=</span>
+<span class="Constant">5</span> <span class="Statement">+</span> (<span class="Constant">4</span> <span class="Statement">+</span> (<span class="Constant">8</span> <span class="Statement">+</span> (<span class="Constant">1</span> <span class="Statement">+</span> <span class="Constant">0</span>)))      <span class="Statement"></span>
+</pre>
+    </section>
+</section>
+<section class="slide" id="reversing-a-list">
+<h2>Thinking inductively</h2>
+<ol>
+    <li>Solve trivial example (the base case)</li>
+    <li>Pretend our function works</li>
+    <li>Split into subproblems</li>
+    <li>Solve subproblems by using our function, then put together final solution</li>
+</ol>
+<section class="slide">
+<pre>
+reverse' <span class="Statement">::</span> [a] <span class="Statement">-&gt;</span> [a]
+reverse' [] <span class="Statement">=</span> []
+reverse' (x<span class="Statement">:</span>xs) <span class="Statement">=</span> reverse xs <span class="Statement">++</span> [x]
+</pre>
+</section>
+<section class="slide" id="">
+<pre>
+reverse' [<span class="Constant">1</span>,<span class="Constant">0</span>,<span class="Constant">3</span>,<span class="Constant">5</span>]                           <span class="Statement">=</span>
+reverse' [<span class="Constant">0</span>,<span class="Constant">3</span>,<span class="Constant">5</span>] <span class="Statement">++</span> [<span class="Constant">1</span>]                      <span class="Statement">=</span>
+(reverse' [<span class="Constant">3</span>,<span class="Constant">5</span>] <span class="Statement">++</span> [<span class="Constant">0</span>]) <span class="Statement">++</span> [<span class="Constant">1</span>]               <span class="Statement">=</span>
+((reverse [<span class="Constant">5</span>] <span class="Statement">++</span> [<span class="Constant">3</span>]) <span class="Statement">++</span> [<span class="Constant">0</span>]) <span class="Statement">++</span> [<span class="Constant">1</span>]         <span class="Statement">=</span>
+(((reverse [] <span class="Statement">++</span> [<span class="Constant">5</span>]) <span class="Statement">++</span> [<span class="Constant">3</span>]) <span class="Statement">++</span> [<span class="Constant">0</span>]) <span class="Statement">++</span> [<span class="Constant">1</span>] <span class="Statement">=</span>
+((([] <span class="Statement">++</span> [<span class="Constant">5</span>]) <span class="Statement">++</span> [<span class="Constant">3</span>]) <span class="Statement">++</span> [<span class="Constant">0</span>]) <span class="Statement">++</span> [<span class="Constant">1</span>]         <span class="Statement">=</span>
+[<span class="Constant">5</span>,<span class="Constant">3</span>,<span class="Constant">0</span>,<span class="Constant">1</span>]
+</pre>
+</section>
+</section>
+<section class="slide" id="curried-functions">
+<h2>Curried functions</h2>
+<ul>
+    <li>Every function actually takes only one argument</li>
+    <li>So what's going on?</li>
+</ul>
+<pre>
+refraction <span class="Statement">::</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double
+refraction θ n1 n2 <span class="Statement">=</span> asin (sin θ <span class="Statement">*</span> n2 <span class="Statement">/</span> n1)
+</pre>
+<p>This type signature could be written like this</p>
+<pre>
+refraction <span class="Statement">::</span> Double <span class="Statement">-&gt;</span> (Double <span class="Statement">-&gt;</span> (Double <span class="Statement">-&gt;</span> Double))
+</pre>
+<section class="slide">
+<p>Also, these two are equivalent</p>
+<pre>
+λ<span class="Statement">&gt;</span> refraction <span class="Constant">0.1</span> <span class="Constant">9</span> <span class="Constant">10</span>
+<span class="Constant">0.11115477042813192</span>
+
+λ<span class="Statement">&gt;</span> ((refraction <span class="Constant">0.1</span>) <span class="Constant">9</span>) <span class="Constant">10</span>
+<span class="Constant">0.11115477042813192</span>
+</pre>
+</section>
+</ul>
+</section>
+<section class="slide" id="curried-functions-2">
+<h2>Partial application</h2>
+<pre>
+refraction <span class="Statement">::</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double
+refraction θ n1 n2 <span class="Statement">=</span> asin (sin θ <span class="Statement">*</span> n2 <span class="Statement">/</span> n1)
+</pre>
+<pre>
+sharpRefraction <span class="Statement">::</span> Double <span class="Statement">-&gt;</span> Double <span class="Statement">-&gt;</span> Double
+sharpRefraction <span class="Statement">=</span> refraction <span class="Constant">0.1</span>
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> sharpRefraction <span class="Constant">9</span> <span class="Constant">10</span>
+<span class="Constant">0.11115477042813192</span>
+</pre>
+</section>
+<section class="slide" id="curried-functions-3">
+<h2>Partial application</h2>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">let</span> addFive <span class="Statement">=</span> (<span class="Statement">+</span><span class="Constant">5</span>)
+
+λ<span class="Statement">&gt;</span> addFive <span class="Constant">8</span>
+<span class="Constant">13</span>
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> <span class="Statement">let</span> some <span class="Statement">=</span> take <span class="Constant">4</span>
+
+λ<span class="Statement">&gt;</span> some [<span class="Constant">9</span>,<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">2</span>,<span class="Constant">5</span>,<span class="Constant">7</span>,<span class="Constant">8</span>]
+[<span class="Constant">9</span>,<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">2</span>]
+</pre>
+</section>
+<section class="slide" id="higher-order-functions">
+<h2>Higher order functions</h2>
+<ul>
+    <li>Functions are normal values</li>
+    <li>Functions can take functions as arguments and return functions</li>
+    <li>Allows for very powerful abstractions</li>
+</ul>
+<section class="slide">
+<pre>
+applyTwice <span class="Statement">::</span> (a <span class="Statement">-&gt;</span> a) <span class="Statement">-&gt;</span> a <span class="Statement">-&gt;</span> a
+applyTwice f x <span class="Statement">=</span> f (f x)
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> applyTwice succ <span class="Constant">1</span>
+<span class="Constant">3</span>
+
+λ<span class="Statement">&gt;</span> applyTwice (<span class="Statement">*</span><span class="Constant">10</span>) <span class="Constant">3</span>
+<span class="Constant">300</span>
+
+λ<span class="Statement">&gt;</span> applyTwice (<span class="Constant">3</span><span class="Statement">:</span>) [<span class="Constant">5</span>,<span class="Constant">5</span>,<span class="Constant">5</span>]
+[<span class="Constant">3</span>,<span class="Constant">3</span>,<span class="Constant">5</span>,<span class="Constant">5</span>,<span class="Constant">5</span>]
+
+λ<span class="Statement">&gt;</span> applyTwice reverse <span class="Constant">&quot;hello&quot;</span>
+<span class="Constant">&quot;hello&quot;</span>
+</pre>
+</section>
+</section>
+<section class="slide" id="mapping">
+<h2>Mapping functions</h2>
+<ul>
+    <li>Apply function to every element in a list</li>
+    <li>Extremely useful tool</li>
+</ul>
+<pre>
+map <span class="Statement">::</span> (a <span class="Statement">-&gt;</span> b) <span class="Statement">-&gt;</span> [a] <span class="Statement">-&gt;</span> [b]
+map f [] <span class="Statement">=</span> []
+map f (x<span class="Statement">:</span>xs) <span class="Statement">=</span> f x<span class="Statement">:</span>map f xs
+</pre>
+<section class="slide">
+<pre>
+λ<span class="Statement">&gt;</span> map (<span class="Statement">+</span><span class="Constant">3</span>) [<span class="Constant">5</span>,<span class="Constant">9</span>,<span class="Constant">3</span>,<span class="Constant">1</span>]
+[<span class="Constant">8</span>,<span class="Constant">12</span>,<span class="Constant">6</span>,<span class="Constant">4</span>]
+
+λ<span class="Statement">&gt;</span> map (<span class="Statement">\</span>xs <span class="Statement">-&gt;</span> length xs <span class="Statement">==</span> <span class="Constant">5</span>) [<span class="Constant">&quot;hello&quot;</span>,<span class="Constant">&quot;im&quot;</span>,<span class="Constant">&quot;a&quot;</span>,<span class="Constant">&quot;truck&quot;</span>]
+[True,False,False,True]
+
+λ<span class="Statement">&gt;</span> map (<span class="Statement">\</span>xs <span class="Statement">-&gt;</span> (xs, reverse xs <span class="Statement">==</span> xs)) [<span class="Constant">&quot;rat&quot;</span>,<span class="Constant">&quot;aha&quot;</span>,<span class="Constant">&quot;bob&quot;</span>,<span class="Constant">&quot;wow&quot;</span>]
+[(<span class="Constant">&quot;rat&quot;</span>,False),(<span class="Constant">&quot;aha&quot;</span>,True),(<span class="Constant">&quot;bob&quot;</span>,True),(<span class="Constant">&quot;wow&quot;</span>,True)]
+
+λ<span class="Statement">&gt;</span> map (take <span class="Constant">2</span>) [<span class="Constant">&quot;these&quot;</span>,<span class="Constant">&quot;are&quot;</span>,<span class="Constant">&quot;some&quot;</span>,<span class="Constant">&quot;words&quot;</span>]
+[<span class="Constant">&quot;th&quot;</span>,<span class="Constant">&quot;ar&quot;</span>,<span class="Constant">&quot;so&quot;</span>,<span class="Constant">&quot;wo&quot;</span>]
+</pre>
+</section>
+</section>
+<section class="slide" id="filtering">
+<h2>Filtering lists</h2>
+<ul>
+    <li>Filter a list, keeping only elements that satisfy a condition</li>
+</ul>
+<pre>
+filter <span class="Statement">::</span> (a <span class="Statement">-&gt;</span> Bool) <span class="Statement">-&gt;</span> [a] <span class="Statement">-&gt;</span> [a]
+filter f [] <span class="Statement">=</span> []
+filter f (x<span class="Statement">:</span>xs)
+    <span class="Statement">|</span> f x       <span class="Statement">=</span> x<span class="Statement">:</span>filter f xs
+    <span class="Statement">|</span> otherwise <span class="Statement">=</span> filter f xs
+</pre>
+<section class="slide">
+<pre>
+λ<span class="Statement">&gt;</span> filter (<span class="Statement">&gt;</span><span class="Constant">4</span>) [<span class="Constant">8</span>,<span class="Constant">3</span>,<span class="Constant">7</span>,<span class="Constant">1</span>,<span class="Constant">5</span>,<span class="Constant">2</span>]
+[<span class="Constant">8</span>,<span class="Constant">7</span>,<span class="Constant">5</span>]
+
+λ<span class="Statement">&gt;</span> filter (<span class="Statement">\</span>x <span class="Statement">-&gt;</span> x <span class="Statement">==</span> reverse x) [<span class="Constant">&quot;rat&quot;</span>,<span class="Constant">&quot;aha&quot;</span>,<span class="Constant">&quot;bob&quot;</span>,<span class="Constant">&quot;wow&quot;</span>]
+[<span class="Constant">&quot;aha&quot;</span>,<span class="Constant">&quot;bob&quot;</span>,<span class="Constant">&quot;wow&quot;</span>]
+
+λ<span class="Statement">&gt;</span> head (filter (<span class="Statement">\</span>x <span class="Statement">-&gt;</span> x <span class="Statement">`mod`</span> <span class="Constant">3829</span> <span class="Statement">==</span> <span class="Constant">0</span>) [<span class="Constant">100000</span>,<span class="Constant">99999</span><span class="Statement">..</span>])
+<span class="Constant">99554</span>
+
+λ<span class="Statement">&gt;</span> filter (<span class="Statement">`elem`</span> [<span class="Constant">'A'</span><span class="Statement">..</span><span class="Constant">'Z'</span>]) <span class="Constant">&quot;i HatE HomEwork&quot;</span>
+<span class="Constant">&quot;HEHE&quot;</span>
+</pre>
+</section>
+</section>
+<section class="slide" id="cool-list-functions">
+<h2>Some cool list functions</h2>
+<pre>
+λ<span class="Statement">&gt;</span> takeWhile (<span class="Statement">/=</span><span class="Constant">' '</span>) <span class="Constant">&quot;egg yolk for the common folk&quot;</span>
+<span class="Constant">&quot;egg&quot;</span>
+
+λ<span class="Statement">&gt;</span> zipWith (<span class="Statement">*</span>) [<span class="Constant">5</span>,<span class="Constant">3</span>,<span class="Constant">1</span>,<span class="Constant">8</span>] [<span class="Constant">1</span><span class="Statement">..</span>]
+[<span class="Constant">5</span>,<span class="Constant">6</span>,<span class="Constant">3</span>,<span class="Constant">32</span>]
+
+λ<span class="Statement">&gt;</span> zipWith (refraction <span class="Constant">0.1</span>) [<span class="Constant">10</span>,<span class="Constant">10</span><span class="Statement">..</span>] [<span class="Constant">11</span>,<span class="Constant">12</span>,<span class="Constant">13</span>,<span class="Constant">14</span>]
+[<span class="Constant">0.11003869140356927</span>,<span class="Constant">0.12008852980659002</span>,<span class="Constant">0.13015057102557204</span>,<span class="Constant">0.14022588225601307</span>]
+
+λ<span class="Statement">&gt;</span> find (<span class="Statement">\</span>x <span class="Statement">-&gt;</span> x <span class="Statement">`rem`</span> <span class="Constant">3</span> <span class="Statement">==</span> <span class="Constant">0</span>) [<span class="Constant">2</span>,<span class="Constant">4</span>,<span class="Constant">6</span>,<span class="Constant">8</span>,<span class="Constant">9</span>]
+Just <span class="Constant">6</span>
+
+λ<span class="Statement">&gt;</span> any (<span class="Statement">&gt;</span><span class="Constant">10</span>) [<span class="Constant">4</span>,<span class="Constant">3</span>,<span class="Constant">1</span>,<span class="Constant">8</span>]
+False
+</pre>
+</section>
+<section class="slide" id="folds">
+<h2>Folds</h2>
+<ul>
+    <li>Many recursive functions that operate on lists follow the same pattern</li>
+    <li>Base case for the empty list</li>
+    <li>We repeatedly apply some function based on the first element and the rest of the list</li>
+    <li>Folds allow us to reduce a list to a single value</li>
+</ul>
+<pre>
+sum xs <span class="Statement">=</span> foldl (<span class="Statement">+</span>) <span class="Constant">0</span> xs
+</pre>
+<ul>
+    <li><code>foldl</code> folds up a list from the left</li>
+    <li>It takes a binary function, a starting accumulator, and a list to fold up</li>
+    <li>Repeatedly applies the function on the starting accumulator and an element in the list, resulting in a new accumulator</li>
+    <li>When traverses all the elements, it returns the accumulator</li>
+</ul>
+</section>
+<section class="slide" id="folds-2">
+<pre style="margin-top:1em">
+foldl (<span class="Statement">+</span>) <span class="Constant">0</span> [6,3,7,1]
+</pre>
+<pre>
+<span class="Constant">0</span> <span class="Statement">+</span>  <span class="Constant">6</span>
+    [<span class="Constant">6</span>,<span class="Constant">3</span>,<span class="Constant">7</span>,<span class="Constant">1</span>]
+</pre>
+<pre class="slide">
+<span class="Constant">6</span> <span class="Statement">+</span>  <span class="Constant">3</span>
+    [<span class="Constant">3</span>,<span class="Constant">7</span>,<span class="Constant">1</span>]
+</pre>
+<pre class="slide">
+<span class="Constant">10</span> <span class="Statement">+</span> <span class="Constant">7</span>
+    [<span class="Constant">7</span>,<span class="Constant">1</span>]
+</pre>
+<pre class="slide">
+<span class="Constant">17</span> <span class="Statement">+</span> <span class="Constant">1</span>
+    [<span class="Constant">1</span>]
+</pre>
+<pre class="slide">
+<span class="Constant">18</span>
+</pre>
+</section>
+<section class="slide" id="folds-3">
+<h2>Folds</h2>
+<pre>
+foldl f z [a,b,c,d] <span class="Statement">=</span> f (f (f (f z a) b) c) d)
+</pre>
+<pre>
+foldr f z [a,b,c,d] <span class="Statement">=</span> f a (f b (f c (f d z)))
+</pre>
+<section class="slide">
+<pre>
+product xs <span class="Statement">=</span> foldl (<span class="Statement">*</span>) <span class="Constant">1</span> xs
+</pre>
+<pre>
+any xs <span class="Statement">=</span> foldl (<span class="Statement">||</span>) False xs
+</pre>
+<pre>
+map f xs <span class="Statement">=</span> foldr (<span class="Statement">\</span>x acc <span class="Statement">-&gt;</span> f x<span class="Statement">:</span>acc) [] xs
+</pre>
+<pre>
+filter f xs <span class="Statement">=</span> foldr (<span class="Statement">\</span>x acc <span class="Statement">-&gt;</span> <span class="Statement">if</span> f x <span class="Statement">then</span> f<span class="Statement">:</span>acc <span class="Statement">else</span> acc) [] xs
+</pre>
+</section>
+</section>
+<section class="slide" id="a-rpn-calculator">
+<h2>An RPN calculator</h2>
+<ul>
+    <li>Let's make a function that solves algebraic expressions in reverse polish notation</li>
+    <li>Usually operators are infix: <code>10 * (5 + 3)</code></li>
+    <li>Instead of putting the operator between its operands (<code>4 + 3</code>) we can put it after them: <code>4 3 +</code></li>
+    <li><code>4</code> and <code>3</code> go on a stack and then <code>+</code> operates on them because they're at the top of the stack</li>
+    <li><code>4 3 + 7 *</code> is equivalent to <code>(4 + 3) * 7</code></li>
+</ul>
+</section>
+<section class="slide" id="a-rpn-calculator-2">
+<h2>An RPN calculator</h2>
+<p>Let's solve <code>10 4 3 + 2 * -</code></p>
+<img src="img/rpn.png">
+</section>
+<section class="slide" id="a-rpn-calculator-3">
+<h2>An RPN calculator</h2>
+<p>Coding up a solution</p>
+<pre>
+solveRPN <span class="Statement">::</span> String <span class="Statement">-&gt;</span> Double
+</pre>
+<p>We'll take a string, like this:</p>
+<pre>
+<span class="Constant">&quot;10 4 3 + 2 * -&quot;</span>
+</pre>
+<p>Convert it into a list of strings by applying the <code>words</code> function</p>
+<pre>
+[<span class="Constant">&quot;10&quot;</span>,<span class="Constant">&quot;4&quot;</span>,<span class="Constant">&quot;3&quot;</span>,<span class="Constant">&quot;+&quot;</span>,<span class="Constant">&quot;2&quot;</span>,<span class="Constant">&quot;*&quot;</span>,<span class="Constant">&quot;-&quot;</span>]
+</pre>
+<p>We go over it left from right and keep track of a stack as we do that</p>
+</section>
+<section class="slide" id="a-rpn-calculator-4">
+<h2>An RPN calculator</h2>
+<ul>
+    <li>Let's use folds!</li>
+    <li>Our accumulator is going to be the stack</li>
+    <li>We'll use a simple list to represent the stack</li>
+</ul>
+<pre>
+solveRPN <span class="Statement">::</span> String <span class="Statement">-&gt;</span> Double
+solveRPN exp <span class="Statement">=</span> head (foldl foldingFunction [] (words exp))
+    <span class="Type">where</span> foldingFunction stack item <span class="Statement">=</span> <span class="Statement">...</span>
+</pre>
+</section>
+<section class="slide" id="">
+<h2>An RPN calculator</h2>
+<pre>
+solveRPN <span class="Statement">::</span> String <span class="Statement">-&gt;</span> Double
+solveRPN exp <span class="Statement">=</span> head (foldl foldingFunction [] (words exp))
+    <span class="Type">where</span> foldingFunction (x<span class="Statement">:</span>y<span class="Statement">:</span>ys) <span class="Constant">&quot;*&quot;</span> <span class="Statement">=</span> (y <span class="Statement">*</span> x)<span class="Statement">:</span>ys
+          foldingFunction (x<span class="Statement">:</span>y<span class="Statement">:</span>ys) <span class="Constant">&quot;+&quot;</span> <span class="Statement">=</span> (y <span class="Statement">+</span> x)<span class="Statement">:</span>ys
+          foldingFunction (x<span class="Statement">:</span>y<span class="Statement">:</span>ys) <span class="Constant">&quot;-&quot;</span> <span class="Statement">=</span> (y <span class="Statement">-</span> x)<span class="Statement">:</span>ys
+          foldingFunction xs numberString <span class="Statement">=</span> 
+            read numberString<span class="Statement">:</span>xs
+</pre>
+<pre>
+λ<span class="Statement">&gt;</span> solveRPN <span class="Constant">&quot;10 4 3 + 2 * -&quot;</span>
+<span class="Statement">-</span><span class="Constant">4.0</span>
+λ<span class="Statement">&gt;</span> solveRPN <span class="Constant">&quot;4 3 +&quot;</span>
+<span class="Constant">7.0</span>
+λ<span class="Statement">&gt;</span> solveRPN <span class="Constant">&quot; 3 8 2 9 * + -&quot;</span>
+<span class="Statement">-</span><span class="Constant">23.0</span>
+</pre>
+</section>
+<section class="slide" id="thanks">
+<h1>Thanks! Ask me some questions!</h1>
+</section>
+
+<!-- deck.navigation snippet -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- deck.status snippet -->
+<p class="deck-status">
+	<span class="deck-status-current"></span>
+</p>
+
+<!-- deck.goto snippet -->
+<form action="." method="get" class="goto-form">
+	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+	<datalist id="goto-datalist"></datalist>
+	<input type="submit" value="Go">
+</form>
+
+<!-- deck.hash snippet -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
+
+<!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+<script>window.jQuery || document.write('<script src="jquery-1.7.min.js"><\/script>')</script>
+
+<!-- Deck Core and extensions -->
+<script src="core/deck.core.js"></script>
+<script src="extensions/hash/deck.hash.js"></script>
+<script src="extensions/menu/deck.menu.js"></script>
+<script src="extensions/goto/deck.goto.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck -->
+<script>
+$(function() {
+	$.deck('.slide');
+});
+</script>
+
+</body>
+</html>
